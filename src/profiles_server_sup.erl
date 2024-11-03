@@ -1,9 +1,9 @@
 %%%-------------------------------------------------------------------
-%% @doc smartlist_server top level supervisor.
+%% @doc profiles_server_app top level supervisor.
 %% @end
 %%%-------------------------------------------------------------------
 
--module(smartlist_server_sup).
+-module(profiles_server_sup).
 
 -behaviour(supervisor).
 

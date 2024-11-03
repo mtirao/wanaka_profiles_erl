@@ -1,8 +1,8 @@
-{application, smartlist_server,
+{application, profiles_server,
  [{description, "An OTP application"},
   {vsn, "0.1.0"},
   {registered, []},
-  {mod, {smartlist_server_app, []}},
+  {mod, {profiles_server_app, []}},
   {applications,
    [kernel,
     stdlib

@@ -1,27 +1,13 @@
--module(config_db_handler).
+-module(profile_db_handler).
 
--export([configs/0, create/1, update/2, query/1, delete/1, services/1]).
+-export([create/1, update/2, query/1, delete/1, userAuthenticate/1]).
 
 connect() ->
-    pgsql_connection:open("localhost", "smart_bff", "mtirao", "").
+    pgsql_connection:open("localhost", "smartlist_profiles", "mtirao", "").
 
 close(Conn) ->
     pgsql_connection:close(Conn).
 
-services(Request) when is_map(Request) ->
-    Service = binary_to_list(maps:get(<<"service">>,Request)),
-    Conn = connect(),
-    erlang:display(Conn),
-    Result = pgsql_connection:extended_query("select id, service, url, endpoint, priority, count from services where service = $1 order by priority,count",[Service], Conn),
-    close(Conn),
-    {ok, Result}.
-
-configs() ->
-    Conn = connect(),
-    erlang:display(Conn),
-    Result = pgsql_connection:simple_query("select id, service, url, endpoint, priority, count from services", Conn),
-    close(Conn),
-    {ok, Result}.
     
 create(Config) when is_map(Config) ->
     Service = binary_to_list(maps:get(<<"service">>,Config)),
@@ -47,6 +33,14 @@ update(Id, Config) when is_map(Config) ->
     io:format("~s~n", [Endpoint]),
     Conn = connect(),
     Result = pgsql_connection:extended_query("update services set service = $2, url = $3, endpoint = $4, priority = $5 where id = $1", [binary_to_integer(Id), Service, Url, Endpoint, Priority], Conn),
+    close(Conn),
+    {ok, Result}.
+
+userAuthenticate(Authenticate) ->
+    Username = binary_to_list(maps:get(<<"username">>, Authenticate)),
+    Password = binary_to_list(maps:get(<<"password">>, Authenticate)),
+    Conn = connect(),
+    Result = pgsql_connection:extended_query("SELECT id, user_password, user_id FROM profiles WHERE user_name=$1 AND  user_password=$2", [Username, Password], Conn),
     close(Conn),
     {ok, Result}.
 
