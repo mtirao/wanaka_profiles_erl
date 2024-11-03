@@ -17,6 +17,11 @@
   {git,"https://github.com/sile/jsone.git",
        {ref,"331b4a7b66cc9dc7c16ac067cf8a8297e0e669d8"}},
   0},
+ {<<"jsx">>,{pkg,<<"jsx">>,<<"2.10.0">>},1},
+ {<<"jwerl">>,
+  {git,"https://github.com/G-Corp/jwerl.git",
+       {ref,"6e778543ef7470e9e8ae32700f5e5a8cc25e00a4"}},
+  0},
  {<<"pgsql">>,
   {git,"https://github.com/semiocast/pgsql.git",
        {ref,"c7d98673459052b2c48526f16dab11ab34c23891"}},
@@ -34,9 +39,11 @@
 {pkg_hash,[
  {<<"cf">>, <<"5CB902239476E141EA70A740340233782D363A31EEA8AD37049561542E6CD641">>},
  {<<"erlware_commons">>, <<"E0DA62F91E65DEFAE28BB450DDC3C24E85ECB99B926F857CDC6ED8E7DD7076B4">>},
+ {<<"jsx">>, <<"77760560D6AC2B8C51FD4C980E9E19B784016AA70BE354CE746472C33BEB0B1C">>},
  {<<"qdate_localtime">>, <<"72E1034DC6B7FEE8F588281EDDD0BD0DC5260005D758052F50634D265D382C18">>}]},
 {pkg_hash_ext,[
  {<<"cf">>, <<"315E8D447D3A4B02BCDBFA397AD03BBB988A6E0AA6F44D3ADD0F4E3C3BF97672">>},
  {<<"erlware_commons">>, <<"B57C299C39A2992A8C413F9D2C1B8A20061310FB4432B0EEE5E4C4DF7AAA0AA3">>},
+ {<<"jsx">>, <<"9A83E3704807298016968DB506F9FAD0F027DE37546EB838B3AE1064C3A0AD62">>},
  {<<"qdate_localtime">>, <<"1109958D205C65C595C8C5694CB83EBAF2DBE770CF902E4DCE8AFB2C4123764D">>}]}
 ].

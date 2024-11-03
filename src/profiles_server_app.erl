@@ -16,8 +16,10 @@ start(_StartType, _StartArgs) ->
     application:start(ranch),
     application:start(cowboy),
     application:start(pgsql),
+    
     Dispatch = cowboy_router:compile([
-		{ '_', [ {"/api/smartlist/accounts/login", profile_handler, []} ]}
+		{ '_', [ {"/api/wanaka/accounts/login", login_handler, []},
+        {"/api/wanaka/profile/:id", profile_handler, []}]}
     ]),
     {ok, _} = cowboy:start_clear(my_http_listener,
         [{port, 8081}],

@@ -40,13 +40,13 @@ userAuthenticate(Authenticate) ->
     Username = binary_to_list(maps:get(<<"username">>, Authenticate)),
     Password = binary_to_list(maps:get(<<"password">>, Authenticate)),
     Conn = connect(),
-    Result = pgsql_connection:extended_query("SELECT id, user_password, user_id FROM profiles WHERE user_name=$1 AND  user_password=$2", [Username, Password], Conn),
+    Result = pgsql_connection:extended_query("SELECT user_id FROM profiles WHERE user_name=$1 AND  user_password=$2", [Username, Password], Conn),
     close(Conn),
     {ok, Result}.
 
 query(Id) when is_integer(Id) ->
     Conn = connect(),
-    {_, Result} = pgsql_connection:extended_query("select * FROM services WHERE id = $1", [Id], Conn),
+    {_, Result} = pgsql_connection:extended_query("SELECT cell_phone, email, first_name, last_name, phone, user_name, user_password, user_role, id, gender, address, city, user_id FROM profiles WHERE user_id=$1", [Id], Conn),
     close(Conn),
     {ok, Result}.
 
