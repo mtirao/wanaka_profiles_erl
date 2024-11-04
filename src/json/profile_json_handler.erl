@@ -5,7 +5,7 @@
 create_token(UserId) ->
     ExpirationTime = unix_time() + 864000, % ten days
     Jwt = jwerl:sign([{user, UserId}, {exp, ExpirationTime}], hs256, <<"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9">>),
-    binary_to_list(jsone:encode(#{access_token => Jwt,  token_type => <<"JWT">>, expires_in => 3600, refresh_token => <<"">>})).
+    binary_to_list(jsone:encode(#{access_token => Jwt,  token_type => <<"JWT">>, expires_in => ExpirationTime, refresh_token => <<"">>})).
 
 
 profile_by_id(Id) -> 
