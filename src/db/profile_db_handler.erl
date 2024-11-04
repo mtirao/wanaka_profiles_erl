@@ -9,17 +9,17 @@ close(Conn) ->
     pgsql_connection:close(Conn).
 
     
-create(Config) when is_map(Config) ->
+create(Profile) when is_map(Profile) ->
     Service = binary_to_list(maps:get(<<"service">>,Config)),
     Url = binary_to_list(maps:get(<<"url">>,Config)),
     Endpoint = binary_to_list(maps:get(<<"endpoint">>,Config)),
     Priority = maps:get(<<"priority">>,Config),
     Count = maps:get(<<"count">>,Config),
-    io:format("~s~n", [Service]),
-    io:format("~s~n", [Url]),
-    io:format("~s~n", [Endpoint]),
+    
     Conn = connect(),
-    Result = pgsql_connection:extended_query("insert into services(service, url, endpoint, priority, count) values ($1, $2, $3, $4, $5, $6)", [Service, Url, Endpoint, Priority, Count], Conn),
+    Query = "INSERT INTO profiles(cell_phone, email, first_name, last_name, phone, user_name, user_password, user_role, gender, address, city, user_id) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING  cell_phone, email, first_name, last_name, phone, user_name, user_password, user_role, id, gender, address, city"
+    Params = []
+    Result = pgsql_connection:extended_query(Query, [Service, Url, Endpoint, Priority, Count], Conn),
     close(Conn),
     {ok, Result}.
 
